@@ -12,8 +12,7 @@ const useRoutes = require('./API/routes/user')
 console.log('Connecting to MongoDB...')
 
 //connection with mongodb get url from mongodb website 
-var result = mongoose.connect('mongodb+srv://jarepratiksha:nMhrUguU6YaI3TuH@node-shop-cluster.d6o6gxa.mongodb.net/')
-
+var result = mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('MongoDB connected successfully');
     })

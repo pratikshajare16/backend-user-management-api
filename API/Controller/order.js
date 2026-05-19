@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Order = require("../Models/orders")
+const Product = require('../Models/products');
 
 exports.get_all_orders = (req, res, next) => {
 
@@ -11,7 +12,7 @@ exports.get_all_orders = (req, res, next) => {
             res.status(200).json({
                 count: result.length,
                 data: result
-            })
+            }) 
         })
         .catch(error => {
             res.status(500).json({
