@@ -9,8 +9,11 @@ const productRoutes = require('./API/routes/products');
 const orderRoutes = require('./API/routes/orders')
 const useRoutes = require('./API/routes/user')
 
+console.log('Connecting to MongoDB...')
+
 //connection with mongodb get url from mongodb website 
-mongoose.connect('mongodb+srv://jarepratiksha:' + process.env.MONGO_ATLAS_PWD + '@node-shop-cluster.d6o6gxa.mongodb.net/')
+var result = mongoose.connect('mongodb+srv://jarepratiksha:nMhrUguU6YaI3TuH@node-shop-cluster.d6o6gxa.mongodb.net/')
+
     .then(() => {
         console.log('MongoDB connected successfully');
     })
@@ -18,7 +21,7 @@ mongoose.connect('mongodb+srv://jarepratiksha:' + process.env.MONGO_ATLAS_PWD + 
         console.error('MongoDB connection error:', err);
     });
 
-
+console.log(result) // it will print the promise object returned by mongoose.connect() in the console. The promise will be pending until the connection is established or an error occurs. Once the connection is successful, it will log 'MongoDB connected successfully'. If there is an error during the connection process, it will log 'MongoDB connection error:' followed by the error details.  
 
 const morgan = require('morgan') // It provides logging functionality to log information about incoming HTTP requests to your server.
 app.use(morgan('dev')) //. The 'dev' parameter passed to morgan specifies the predefined log format,
@@ -28,7 +31,7 @@ app.use('/upload', express.static('upload')); // make upload folder public, with
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
-//When client and server are on 2 diffrent ports so we have to set headers 
+//When client and server are on 2 different ports so we have to set headers 
 //CORS error handling
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
